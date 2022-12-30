@@ -13,11 +13,7 @@ import BankHi.Model.VO.MemberSH;
 
 public class BankView {
 	Scanner sc;
-	/** 로그 관련 */
-	Date date = new Date();
-	SimpleDateFormat trans = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private String time = trans.format(date);
-	
+
 	public BankView() {
 		sc = new Scanner(System.in);
 	}
@@ -154,7 +150,7 @@ public class BankView {
 		System.out.println("[아이디] "+member.getMemberId()+"\t\t[패스워드] ********\t\t[가입일] "+member.getEnrollDate());
 		System.out.println("[이름] "+member.getMemberName()+"\t\t[성별] "+member.getMemberGender()+"\t\t\t[생년월일]"+member.getMemberSSN().substring(0, 6));
 		System.out.println("[은행명] "+member.getMemberBank()+"\t\t[계좌번호] "+memSH.getShNum()+"\t\t[잔액] "+memSH.getShBalance()+"원");
-		System.out.println("[대출이용] "+memSH.getLoanYn()+"\t\t[대출한도] "+memSH.getLoanLimit()+"원 \t\t[상환할 금액] "+memSH.getLoanMoney());
+		System.out.println("[대출가능여부] "+memSH.getLoanYn()+"\t[대출한도] "+memSH.getLoanLimit()+"원 \t\t[상환할 금액] "+memSH.getLoanMoney());
 	}
 	
 	public void mypageView(Member member, MemberKB memKB) {
@@ -165,11 +161,8 @@ public class BankView {
 		System.out.println("[아이디] "+member.getMemberId()+"\t\t[패스워드] ********\t\t[가입일] "+member.getEnrollDate());
 		System.out.println("[이름] "+member.getMemberName()+"\t\t[성별] "+member.getMemberGender()+"\t\t\t[생년월일]"+member.getMemberSSN().substring(0, 6));
 		System.out.println("[은행명] "+member.getMemberBank()+"\t\t[계좌번호] "+memKB.getKbNum()+"\t[잔액] "+memKB.getKbBalance()+"원");
-		System.out.println("[대출이용] "+memKB.getLoanYn()+"\t\t[대출한도] "+memKB.getLoanLimit()+"원 \t\t[상환할 금액] "+memKB.getLoanMoney());
+		System.out.println("[대출가능여부] "+memKB.getLoanYn()+"\t[대출한도] "+memKB.getLoanLimit()+"원 \t\t[상환할 금액] "+memKB.getLoanMoney());
 	}
-	
-	
-	
 	
 	
 	
@@ -182,13 +175,13 @@ public class BankView {
 	/**-------------------------------------------------------------------------------------------------
 	/ 시스템 메시지 (성공/실패)
 	/-------------------------------------------------------------------------------------------------*/
-	public String successView(String msg, Member member) {
-		String message = "[시스템 메시지]: "+member.getMemberId()+"님이 "+msg+"에 성공하였습니다. ("+time+")";
+	public String successView(String msg) {
+		String message = "[시스템 메시지]: "+msg+"에 성공하였습니다.";
 		System.out.println(message);
 		return message;
 	}
 	public String failedView(String msg) {
-		String message = "[시스템 메시지]: "+msg+"에 실패하였습니다.  ("+time+")";
+		String message = "[시스템 메시지]: "+msg+"에 실패하였습니다.";
 		System.out.println(message);
 		return message;
 	}

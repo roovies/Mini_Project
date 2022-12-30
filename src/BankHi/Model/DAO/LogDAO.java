@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import BankHi.Model.VO.Member;
+
 public class LogDAO {
 	private final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -19,7 +21,7 @@ public class LogDAO {
 			Statement stmt = conn.createStatement();
 			
 			/** DML(INSERT) */
-			String sql = "INSERT INTO LOG VALUES('"+log+"')";
+			String sql = "INSERT INTO LOG VALUES('"+log+"', SYSDATE)";
 			stmt.executeUpdate(sql);
 		} catch (ClassNotFoundException e) {
 		} catch (SQLException e) {

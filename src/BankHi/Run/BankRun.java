@@ -20,7 +20,6 @@ public class BankRun {
 		MemberKB memKB = null;
 		List<Member> mList = new ArrayList<Member>();
 		
-		String log = "";
 		int select = 0;
 		int result = 0;
 		
@@ -39,8 +38,8 @@ public class BankRun {
 				/ 로그인세션
 				/-------------------------------------------------------------------------------------------------*/
 				if (member != null) {
-					log = bView.successView("로그인", member);
-					logCon.logging(log);
+					bView.successView("로그인");
+					logCon.logging("로그인 성공", member);
 					while (true) {
 						select = bView.menuView(member);
 						switch (select) {
@@ -49,20 +48,24 @@ public class BankRun {
 							if (member.getMemberBank().substring(0, 2).equals("SH")) {
 								memSH = bCon.loadSHMember(member);
 								bView.mypageView(member, memSH);
+								logCon.logging("내정보 조회 성공", member);
 							} else {
 								memKB = bCon.loadKBMember(member);
 								bView.mypageView(member, memKB);
+								logCon.logging("내정보 조회 성공", member);
 							}
 							break;
 						case 0: // 로그아웃
+							bView.successView("로그아웃");
+							logCon.logging("로그아웃", member);
 							break logout;
 						default:
 							break;
 						}
 					}
 				} else {
-					log = bView.failedView("로그인");
-					logCon.logging(log);
+					bView.failedView("로그인");
+					logCon.logging("로그인 실패", member);
 				}
 				break;
 			/**-------------------------------------------------------------------------------------------------
@@ -72,43 +75,34 @@ public class BankRun {
 				member = bView.registerView(member);
 				result = bCon.registerMember(member);
 				System.out.println(result);
-				if(result>0) {
+				if(result>0) { //회원가입 성공
 					if(member.getMemberBank().equals("SH은행")) {
 						result = bCon.registerSHBank(member);
 						if(result>0) {
-						log = bView.successView("회원가입", member);
-						logCon.logging(log);
+						bView.successView("회원가입");
+						logCon.logging("회원가입 성공", member);
 						}
 						else {
-						log = bView.failedView("회원가입");
-						logCon.logging(log);
+						bView.failedView("회원가입");
+						logCon.logging("회원가입 실패", member);
+						}
+					}
+					else {
+						result = bCon.registerKBBank(member);
+						if(result>0) {
+							bView.successView("회원가입");
+							logCon.logging("회원가입 성공", member);
+						}
+						else {
+							bView.failedView("회원가입");
+							logCon.logging("회원가입 실패", member);
 						}
 					}
 				}
-//				if(result>0) {
-//					if("SH은행".equals(member.getMemberBank())) {
-//						result = bCon.registerSHBank(member);
-//						if(result>0) {
-//							log = bView.successView("회원가입", member);
-//							logCon.logging(log);
-//						}
-//						else {
-//							log = bView.failedView("회원가입");
-//							logCon.logging(log);
-//						}
-//					}
-//					else {
-//						result = bCon.registerKBBank(member);
-//						if(result>0) {
-//							log = bView.successView("회원가입", member);
-//							logCon.logging(log);
-//						}
-//						else {
-//							log = bView.failedView("회원가입");
-//							logCon.logging(log);
-//						}
-//					}
-//				}
+				else {
+					bView.failedView("회원가입");
+					logCon.logging("회원가입 실패", member);
+				}
 				break;
 			case 3 : break;
 			case 4 : break;
