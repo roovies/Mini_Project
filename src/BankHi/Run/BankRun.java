@@ -104,7 +104,20 @@ public class BankRun {
 					logCon.logging("회원가입 실패", member);
 				}
 				break;
-			case 3 : break;
+			/**-------------------------------------------------------------------------------------------------
+			/ 아이디찾기세션
+			/-------------------------------------------------------------------------------------------------*/
+			case 3 : 
+				member = bView.searchIdView(member);
+				mList = bCon.searchAll();
+				member = bCon.searchId(mList, member);
+				if(member.getMemberId()==null) //검색된 정보의 아이디가 존재하지 않음
+					bView.searchNoView(member);
+				else { //아이디 존재
+					bView.searchOkView(member);
+					logCon.logging("아이디 찾기 성공", member);					
+				}
+				break;
 			case 4 : break;
 			case 0 : break close;
 			default : break;

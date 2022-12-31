@@ -49,8 +49,18 @@ public class BankController {
 		return mList;
 	}
 	
-	
-	
+	/**-------------------------------------------------------------------------------------------------
+	/ 아이디 찾기 기능
+	/-------------------------------------------------------------------------------------------------*/
+	public Member searchId(List<Member> mList, Member member) {
+		for(int i=0; i<mList.size(); i++) {
+			if(mList.get(i).getMemberName().equals(member.getMemberName())
+				&& mList.get(i).getMemberPhone().equals(member.getMemberPhone())) {
+				return mList.get(i);
+			}
+		}
+		return member;
+	}
 	
 	/**-------------------------------------------------------------------------------------------------
 	/ 각 은행별 고객정보 로드 기능

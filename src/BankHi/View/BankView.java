@@ -55,6 +55,32 @@ public class BankView {
 	
 	
 	/**-------------------------------------------------------------------------------------------------
+	/ 아이디 찾기뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public Member searchIdView(Member member) {
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■■\t\t가입 시 입력한 이름과 핸드폰 번호를 입력하세요. \t\t■■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■ 이름을 입력하세요.");
+		System.out.print("  입력 >> ");
+		String searchName = sc.next();
+		System.out.println("■ 핸드폰 번호를 입력하세요. (예시: 010-1234-1234)");
+		System.out.print("  입력 >> ");
+		String searchPhone = sc.next();
+		member = new Member();
+		member.setMemberName(searchName);
+		member.setMemberPhone(searchPhone);
+		return member;
+	}
+	
+	public void searchOkView(Member member) {
+		System.out.println("  [*] \""+member.getMemberName()+"\"님의 아이디는 "+member.getMemberId()+" 입니다.");
+	}
+	public void searchNoView(Member member) {
+		System.out.println("  [*] 입력한 정보로 등록된 회원이 존재하지 않습니다.");
+	}
+	
+	/**-------------------------------------------------------------------------------------------------
 	/ 회원가입뷰
 	/-------------------------------------------------------------------------------------------------*/
 	public Member registerView(Member member) {
