@@ -19,6 +19,8 @@ public class MemberDAO {
 	private final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
 	private final String USER = "ROOVIES";
 	private final String PW = "ROOVIES";
+	
+	
 	/**-------------------------------------------------------------------------------------------------
 	/ 전체 회원 목록 조회 DAO
 	/-------------------------------------------------------------------------------------------------*/
@@ -54,6 +56,8 @@ public class MemberDAO {
 		}
 		return mList;
 	}
+	
+	
 	/**-------------------------------------------------------------------------------------------------
 	/ 회원가입 DAO
 	/-------------------------------------------------------------------------------------------------*/
@@ -127,6 +131,28 @@ public class MemberDAO {
 		return result;
 	}
 	
+	
+	/**-------------------------------------------------------------------------------------------------
+	/ 비밀번호 변경 DAO
+	/-------------------------------------------------------------------------------------------------*/
+	public int updatePw(Member member) {
+		int result = 0;
+		try {
+			/** JDBC */
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PW);
+			String sql = "UPDATE MEMBER SET MEMBER_PW=? WHERE MEMBER_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberPw());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
 	/**-------------------------------------------------------------------------------------------------

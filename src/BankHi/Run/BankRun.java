@@ -24,6 +24,10 @@ public class BankRun {
 		int result = 0;
 		
 		/**-------------------------------------------------------------------------------------------------
+		/ 관리자 세션
+		/-------------------------------------------------------------------------------------------------*/
+		
+		/**-------------------------------------------------------------------------------------------------
 		/ 메인세션
 		/-------------------------------------------------------------------------------------------------*/
 		close :
@@ -112,13 +116,34 @@ public class BankRun {
 				mList = bCon.searchAll();
 				member = bCon.searchId(mList, member);
 				if(member.getMemberId()==null) //검색된 정보의 아이디가 존재하지 않음
-					bView.searchNoView(member);
+					bView.searchNoView();
 				else { //아이디 존재
-					bView.searchOkView(member);
+					bView.searchIdOkView(member);
 					logCon.logging("아이디 찾기 성공", member);					
 				}
 				break;
-			case 4 : break;
+			case 4 : //비밀번호 찾기
+				member = bView.searchPwView(member);
+				mList = bCon.searchAll();
+				member = bCon.searchPw(mList, member);
+				if(member.getMemberPw()==null) {
+					bView.searchNoView();
+					logCon.logging("비밀번호 찾기 시도 실패", member);
+				}
+				else {
+					member = bView.searchPwOkView(member);
+					while(true) {
+						if(member.getMemberPw()==null)
+							bView.searchPwOkView(member);
+						else {
+							result = bCon.modifyPw(member);
+							bView.successView("비밀번호 변경");
+							logCon.logging("비밀번호 변경 성공", member);
+							break;
+						}
+					}
+				}
+				break;
 			case 0 : break close;
 			default : break;
 			}

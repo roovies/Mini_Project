@@ -42,12 +42,13 @@ public class BankController {
 	
 	
 	/**-------------------------------------------------------------------------------------------------
-	/ 전체 회원 목록 조회 기능 (지금 쓰는 곳 없음)
+	/ 전체 회원 목록 조회 기능
 	/-------------------------------------------------------------------------------------------------*/
 	public List<Member> searchAll() {
 		mList = mDAO.selectAll();
 		return mList;
 	}
+	
 	
 	/**-------------------------------------------------------------------------------------------------
 	/ 아이디 찾기 기능
@@ -60,6 +61,26 @@ public class BankController {
 			}
 		}
 		return member;
+	}
+	
+	
+	/**-------------------------------------------------------------------------------------------------
+	/ 비밀번호 찾기 기능
+	/-------------------------------------------------------------------------------------------------*/
+	public Member searchPw(List<Member> mList, Member member) {
+		for(int i=0; i<mList.size(); i++) {
+			if(mList.get(i).getMemberId().equals(member.getMemberId())
+				&& mList.get(i).getMemberName().equals(member.getMemberName())
+				&& mList.get(i).getMemberPhone().equals(member.getMemberPhone())) {
+				return mList.get(i);
+			}
+		}
+		return member;
+	}
+	
+	public int modifyPw(Member member) {
+		int result = mDAO.updatePw(member);
+		return result;
 	}
 	
 	/**-------------------------------------------------------------------------------------------------

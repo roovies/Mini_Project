@@ -18,7 +18,7 @@ public class BankView {
 		sc = new Scanner(System.in);
 	}
 	/**-------------------------------------------------------------------------------------------------
-	/ 메인뷰
+	/ 메인 뷰
 	/-------------------------------------------------------------------------------------------------*/
 	public int mainView() {
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
@@ -36,7 +36,7 @@ public class BankView {
 	
 	
 	/**-------------------------------------------------------------------------------------------------
-	/ 로그인뷰
+	/ 로그인 뷰
 	/-------------------------------------------------------------------------------------------------*/
 	public Member loginView() {
 		System.out.println();
@@ -55,12 +55,13 @@ public class BankView {
 	
 	
 	/**-------------------------------------------------------------------------------------------------
-	/ 아이디 찾기뷰
+	/ 아이디 찾기 뷰
 	/-------------------------------------------------------------------------------------------------*/
 	public Member searchIdView(Member member) {
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("■■\t\t가입 시 입력한 이름과 핸드폰 번호를 입력하세요. \t\t■■");
+		System.out.println("■■\t\t\t아\t이\t디\t찾\t기\t\t\t■■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("※ 가입 시 입력한 이름과 핸드폰 번호를 입력하세요. ");
 		System.out.println("■ 이름을 입력하세요.");
 		System.out.print("  입력 >> ");
 		String searchName = sc.next();
@@ -73,15 +74,59 @@ public class BankView {
 		return member;
 	}
 	
-	public void searchOkView(Member member) {
+	public void searchIdOkView(Member member) {
 		System.out.println("  [*] \""+member.getMemberName()+"\"님의 아이디는 "+member.getMemberId()+" 입니다.");
 	}
-	public void searchNoView(Member member) {
+	public void searchNoView() {
 		System.out.println("  [*] 입력한 정보로 등록된 회원이 존재하지 않습니다.");
 	}
 	
+	
 	/**-------------------------------------------------------------------------------------------------
-	/ 회원가입뷰
+	/ 비밀번호 찾기 뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public Member searchPwView(Member member) {
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■■\t\t비\t밀\t번\t호\t찾\t기\t\t\t■■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("※ 아이디와 이름 핸드폰 번호를 입력하세요. ");
+		System.out.println("■ 아이디를 입력하세요.");
+		System.out.print("  입력 >> ");
+		String searchId = sc.next();
+		System.out.println("■ 이름을 입력하세요.");
+		System.out.print("  입력 >> ");
+		String searchName = sc.next();
+		System.out.println("■ 핸드폰 번호를 입력하세요. (예시: 010-1234-1234)");
+		System.out.print("  입력 >> ");
+		String searchPhone = sc.next();
+		member = new Member();
+		member.setMemberId(searchId);
+		member.setMemberName(searchName);
+		member.setMemberPhone(searchPhone);
+		return member;
+	}
+	
+	public Member searchPwOkView(Member member) {
+		System.out.println("■ 새 비밀번호를 입력하세요.");
+		System.out.print("  입력 >> ");
+		String inputPw = sc.next();
+		System.out.println("■ 비밀번호를 한 번 더 입력하세요.");
+		System.out.print("  입력 >> ");
+		String inputPw2 = sc.next();
+		if(!inputPw.equals(inputPw2)) {
+			System.out.println("입력한 비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+			member.setMemberPw(null);
+			return member;
+		}
+		else {
+			member.setMemberPw(inputPw);
+			return member;
+		}
+	}
+	
+	
+	/**-------------------------------------------------------------------------------------------------
+	/ 회원가입 뷰
 	/-------------------------------------------------------------------------------------------------*/
 	public Member registerView(Member member) {
 		//계좌번호 랜덤 생성
@@ -151,7 +196,7 @@ public class BankView {
 	
 	
 	/**-------------------------------------------------------------------------------------------------
-	/ 메뉴뷰
+	/ 메뉴 뷰
 	/-------------------------------------------------------------------------------------------------*/
 	public int menuView(Member member) {
 		System.out.println();
@@ -166,7 +211,7 @@ public class BankView {
 	}
 	
 	/**-------------------------------------------------------------------------------------------------
-	/ 내 정보 조회뷰 (Overloading)
+	/ 내 정보 조회 뷰 (Overloading)
 	/-------------------------------------------------------------------------------------------------*/
 	public void mypageView(Member member, MemberSH memSH) {
 		System.out.println();
