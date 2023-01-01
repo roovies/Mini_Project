@@ -198,6 +198,70 @@ public class MemberDAO {
 	/**-------------------------------------------------------------------------------------------------
 	/ 각 은행 회원정보 로드 DAO
 	/-------------------------------------------------------------------------------------------------*/
+	//각 은행 모든 회원정보 로드
+	public List<MemberSH> selectSHAll(){
+		List<MemberSH> shList = new ArrayList<MemberSH>();
+		MemberSH memSH = null;
+		try {
+			/** JDBC */
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PW);
+			Statement stmt = conn.createStatement();
+			String sql = "SELECT * FROM SHBANK";
+			ResultSet rset = stmt.executeQuery(sql);
+			while(rset.next()) {
+				memSH = new MemberSH();
+				memSH.setMemberId(rset.getString(1));
+				memSH.setMemberName(rset.getString(2));
+				memSH.setMemberBank("SH은행");
+				memSH.setShNum(rset.getString(3));
+				memSH.setShBalance(rset.getInt(5));
+				memSH.setLoanYn(rset.getString(6));
+				memSH.setLoanMoney(rset.getInt(7));
+				memSH.setLoanLimit(rset.getInt(8));
+				memSH.setEnrollDate(rset.getDate(9));
+				shList.add(memSH);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return shList;
+	}
+	
+	public List<MemberKB> selectKBAll(){
+		List<MemberKB> kbList = new ArrayList<MemberKB>();
+		MemberKB memKB = null;
+		try {
+			/** JDBC */
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PW);
+			Statement stmt = conn.createStatement();
+			String sql = "SELECT * FROM KBBANK";
+			ResultSet rset = stmt.executeQuery(sql);
+			while(rset.next()) {
+				memKB = new MemberKB();
+				memKB.setMemberId(rset.getString(1));
+				memKB.setMemberName(rset.getString(2));
+				memKB.setMemberBank("KB은행");
+				memKB.setKbNum(rset.getString(3));
+				memKB.setKbBalance(rset.getInt(5));
+				memKB.setLoanYn(rset.getString(6));
+				memKB.setLoanMoney(rset.getInt(7));
+				memKB.setLoanLimit(rset.getInt(8));
+				memKB.setEnrollDate(rset.getDate(9));
+				kbList.add(memKB);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return kbList;
+	}
+	
+	// 각 은행 개별 회원정보 로드
 	public MemberSH selectSHJoin(Member member) {
 		MemberSH memSH = null;
 		try {
@@ -215,7 +279,7 @@ public class MemberDAO {
 				memSH.setMemberBank(rset.getString("MEMBER_BANK"));
 				memSH.setShNum(rset.getString("SH_NUM"));
 				memSH.setShPw(rset.getString("SH_PW"));
-				memSH.setShBalance(rset.getString("SH_BALANCE"));
+				memSH.setShBalance(rset.getInt("SH_BALANCE"));
 				memSH.setLoanYn(rset.getString("LOAN_YN"));
 				memSH.setLoanMoney(rset.getInt("LOAN_MONEY"));
 				memSH.setLoanLimit(rset.getInt("LOAN_LIMIT"));
@@ -246,7 +310,7 @@ public class MemberDAO {
 				memKB.setMemberBank(rset.getString("MEMBER_BANK"));
 				memKB.setKbNum(rset.getString("KB_NUM"));
 				memKB.setKbPw(rset.getString("KB_PW"));
-				memKB.setKbBalance(rset.getString("KB_BALANCE"));
+				memKB.setKbBalance(rset.getInt("KB_BALANCE"));
 				memKB.setLoanYn(rset.getString("LOAN_YN"));
 				memKB.setLoanMoney(rset.getInt("LOAN_MONEY"));
 				memKB.setLoanLimit(rset.getInt("LOAN_LIMIT"));

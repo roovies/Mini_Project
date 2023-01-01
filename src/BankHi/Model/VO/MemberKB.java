@@ -8,14 +8,14 @@ public class MemberKB {
 	private String memberBank;
 	private String kbNum;
 	private String kbPw;
-	private String kbBalance;
+	private int kbBalance;
 	private String loanYn;
 	private int loanMoney;
 	private int loanLimit;
 	private Date enrollDate;
 	
 	public MemberKB() {}
-	public MemberKB(String memberId, String memberName, String memberBank, String kbNum, String kbPw, String kbBalance,
+	public MemberKB(String memberId, String memberName, String memberBank, String kbNum, String kbPw, int kbBalance,
 			String loanYn, int loanMoney, int loanLimit, Date enrollDate) {
 		super();
 		this.memberId = memberId;
@@ -62,10 +62,10 @@ public class MemberKB {
 	public void setKbPw(String kbPw) {
 		this.kbPw = kbPw;
 	}
-	public String getKbBalance() {
+	public int getKbBalance() {
 		return kbBalance;
 	}
-	public void setKbBalance(String kbBalance) {
+	public void setKbBalance(int kbBalance) {
 		this.kbBalance = kbBalance;
 	}
 	public String getLoanYn() {

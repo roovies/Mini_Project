@@ -86,6 +86,17 @@ public class BankController {
 	/**-------------------------------------------------------------------------------------------------
 	/ 각 은행별 고객정보 로드 기능
 	/-------------------------------------------------------------------------------------------------*/
+	//모든 고객 정보
+	public List<MemberSH> loadSHMemberAll() {
+		List<MemberSH> shList = mDAO.selectSHAll();
+		return shList;
+	}
+	public List<MemberKB> loadKBMemberAll() {
+		List<MemberKB> kbList = mDAO.selectKBAll();
+		return kbList;
+	}
+	
+	//개별 고객 정보
 	public MemberSH loadSHMember(Member member) {
 		memSH = mDAO.selectSHJoin(member);
 		return memSH;

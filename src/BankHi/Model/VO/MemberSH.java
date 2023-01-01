@@ -8,7 +8,7 @@ public class MemberSH {
 	private String memberBank;
 	private String shNum;
 	private String shPw;
-	private String shBalance;
+	private int shBalance;
 	private String loanYn;
 	private int loanMoney;
 	private int loanLimit;
@@ -16,7 +16,7 @@ public class MemberSH {
 	
 	
 	public MemberSH() {}
-	public MemberSH(String memberId, String memberName, String memberBank, String shNum, String shPw, String shBalance,
+	public MemberSH(String memberId, String memberName, String memberBank, String shNum, String shPw, int shBalance,
 			String loanYn, int loanMoney, int loanLimit, Date enrollDate) {
 		super();
 		this.memberId = memberId;
@@ -64,10 +64,10 @@ public class MemberSH {
 	public void setShPw(String shPw) {
 		this.shPw = shPw;
 	}
-	public String getShBalance() {
+	public int getShBalance() {
 		return shBalance;
 	}
-	public void setShBalance(String shBalance) {
+	public void setShBalance(int shBalance) {
 		this.shBalance = shBalance;
 	}
 	public String getLoanYn() {

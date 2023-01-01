@@ -19,36 +19,60 @@ public class BankRun {
 		MemberSH memSH = null;
 		MemberKB memKB = null;
 		List<Member> mList = new ArrayList<Member>();
+		List<MemberSH> shList = new ArrayList<MemberSH>();
+		List<MemberKB> kbList = new ArrayList<MemberKB>();
 		
 		int select = 0;
 		int result = 0;
-		
+
 		/**-------------------------------------------------------------------------------------------------
-		/ 관리자 세션
+		/ 메인 세션
 		/-------------------------------------------------------------------------------------------------*/
-		
-		/**-------------------------------------------------------------------------------------------------
-		/ 메인세션
-		/-------------------------------------------------------------------------------------------------*/
-		close :
+		close:
 		while(true) {
 			select = bView.mainView();
 			switch(select) {
+			/**-------------------------------------------------------------------------------------------------
+			/ 메인 - 로그인 세션
+			/-------------------------------------------------------------------------------------------------*/
 			case 1 : 
 				member = bView.loginView();
 				member = bCon.login(member);
-				logout:
-				/**-------------------------------------------------------------------------------------------------
-				/ 로그인세션
-				/-------------------------------------------------------------------------------------------------*/
-				if (member != null) {
+				if(member==null) {								//로그인 실패
+					bView.failedView("로그인");
+					logCon.logging("로그인 실패", member);
+				}
+				else if(member.getMemberId().equals("admin")) { //관리자 로그인 성공
 					bView.successView("로그인");
 					logCon.logging("로그인 성공", member);
-					while (true) {
+					adlogout:
+					while(true) {
+						select = bView.ad_menuView(member);
+						switch(select) {
+						case 1 :
+							shList = bCon.loadSHMemberAll();
+							kbList = bCon.loadKBMemberAll();
+							bView.ad_memberListView(shList, kbList);
+							bView.successView("전체 회원 목록 조회");
+							logCon.logging("전체 회원 목록 조회", member);
+							break;
+						case 2 :
+							break;
+						case 0 :
+							bView.successView("로그아웃");
+							logCon.logging("로그아웃", member);
+							break adlogout;
+						}
+					}
+				}
+				else if((!member.getMemberId().equals("admin"))&&(member != null)) { //일반회원 로그인 성공
+					bView.successView("로그인");
+					logCon.logging("로그인 성공", member);
+					logout:
+					while(true) {
 						select = bView.menuView(member);
-						switch (select) {
-						case 1: // 내정보 조회
-							// 만약 member의 은행명이 SH면 sh멤버정보 로드, KB면 kh멤버정보 로드하도록 if문
+						switch(select) {
+						case 1 : //내정보 조회
 							if (member.getMemberBank().substring(0, 2).equals("SH")) {
 								memSH = bCon.loadSHMember(member);
 								bView.mypageView(member, memSH);
@@ -59,26 +83,84 @@ public class BankRun {
 								logCon.logging("내정보 조회 성공", member);
 							}
 							break;
-						case 0: // 로그아웃
+						case 2 :
+							break;
+						case 0 : //로그아웃
 							bView.successView("로그아웃");
 							logCon.logging("로그아웃", member);
 							break logout;
-						default:
+						default :
 							break;
 						}
 					}
-				} else {
-					bView.failedView("로그인");
-					logCon.logging("로그인 실패", member);
 				}
 				break;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//				logout://no
+
+//				adlogout:
+//				/**-------------------------------------------------------------------------------------------------
+//				/ 로그인세션
+//				/-------------------------------------------------------------------------------------------------*/
+//				if (member != null) {
+//					bView.successView("로그인");
+//					logCon.logging("로그인 성공", member);
+//					/**-------------------------------------------------------------------------------------------------
+//					/ 관리자 로그인 성공
+//					/-------------------------------------------------------------------------------------------------*/
+//					if(member.getMemberId().equals("admin")) {
+//						while(true) {
+//							select = bView.ad_menuView(member);
+//							switch(select) {
+//							case 1:
+//								mList = bCon.searchAll();
+//								bView.ad_memberListView(mList);
+//								break;
+//							case 0:
+//								break adlogout;
+//							}
+//						}
+//					}
+//
+//					logout:
+//					/**-------------------------------------------------------------------------------------------------
+//					/ 일반회원 로그인 성공
+//					/-------------------------------------------------------------------------------------------------*/
+//					while (true) {
+//						select = bView.menuView(member);
+//						switch (select) {
+//						case 1: // 내정보 조회
+//							// 만약 member의 은행명이 SH면 sh멤버정보 로드, KB면 kh멤버정보 로드하도록 if문
+//							if (member.getMemberBank().substring(0, 2).equals("SH")) {
+//								memSH = bCon.loadSHMember(member);
+//								bView.mypageView(member, memSH);
+//								logCon.logging("내정보 조회 성공", member);
+//							} else {
+//								memKB = bCon.loadKBMember(member);
+//								bView.mypageView(member, memKB);
+//								logCon.logging("내정보 조회 성공", member);
+//							}
+//							break;
+//						case 0: // 로그아웃
+////							member = null;
+//							bView.successView("로그아웃");
+//							logCon.logging("로그아웃", member);
+//							break logout;
+//						default:
+//							break;
+//						}
+//					}
+//				} else {
+//					bView.failedView("로그인");
+//					logCon.logging("로그인 실패", member);
+//				}
+//				break;
 			/**-------------------------------------------------------------------------------------------------
-			/ 회원가입세션
+			/ 메인 - 회원가입 세션
 			/-------------------------------------------------------------------------------------------------*/
 			case 2 : 
 				member = bView.registerView(member);
 				result = bCon.registerMember(member);
-				System.out.println(result);
 				if(result>0) { //회원가입 성공
 					if(member.getMemberBank().equals("SH은행")) {
 						result = bCon.registerSHBank(member);
@@ -109,7 +191,7 @@ public class BankRun {
 				}
 				break;
 			/**-------------------------------------------------------------------------------------------------
-			/ 아이디찾기세션
+			/ 메인 - 아이디 찾기 세션
 			/-------------------------------------------------------------------------------------------------*/
 			case 3 : 
 				member = bView.searchIdView(member);
@@ -122,7 +204,10 @@ public class BankRun {
 					logCon.logging("아이디 찾기 성공", member);					
 				}
 				break;
-			case 4 : //비밀번호 찾기
+			/**-------------------------------------------------------------------------------------------------
+			/ 메인 - 비밀번호 찾기 세션
+			/-------------------------------------------------------------------------------------------------*/
+			case 4 : 
 				member = bView.searchPwView(member);
 				mList = bCon.searchAll();
 				member = bCon.searchPw(mList, member);
@@ -147,7 +232,6 @@ public class BankRun {
 			case 0 : break close;
 			default : break;
 			}
-			
 		}
 	}
 }

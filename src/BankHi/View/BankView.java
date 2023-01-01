@@ -36,6 +36,56 @@ public class BankView {
 	
 	
 	/**-------------------------------------------------------------------------------------------------
+	/ 관리자 메뉴 뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public int ad_menuView(Member member) {
+		System.out.println();
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■■\t\t\t\t"+member.getMemberName()+"님 환영합니다. *^^*\t\t\t■■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("1. 전체 회원 목록");
+		System.out.println("0. 로그아웃");
+		System.out.print("선택 >> ");
+		int select = sc.nextInt();
+		return select;
+	}
+	
+	/**-------------------------------------------------------------------------------------------------
+	/ 전체회원 목록 조회
+	/-------------------------------------------------------------------------------------------------*/
+	public void ad_memberListView(List<MemberSH> memSH, List<MemberKB> memKB) {
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.printf("%6s %13s %9s %9s %15s %s %s %8s %12s \n",
+						"[이름]", "[아이디]", "[은행명]", "[계좌번호]", "[잔액]", "[대출가능여부]", "[대출받은 금액]", "[대출한도]", "[가입일]");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		for(int i=0; i<memSH.size(); i++) {
+			System.out.printf("%6s ", memSH.get(i).getMemberName());
+			System.out.printf("%13s ", memSH.get(i).getMemberId());
+			System.out.printf("%10s ", memSH.get(i).getMemberBank());
+			System.out.printf("%16s ", memSH.get(i).getShNum());
+			System.out.printf("%15s원 ", memSH.get(i).getShBalance());
+			System.out.printf("%7s ", memSH.get(i).getLoanYn());
+			System.out.printf("%15s원 ", memSH.get(i).getLoanMoney());
+			System.out.printf("%15s원 ", memSH.get(i).getLoanLimit());
+			System.out.printf("%15s ", memSH.get(i).getEnrollDate());
+			System.out.println();
+		}
+		for(int i=0; i<memKB.size(); i++) {
+			System.out.printf("%6s ", memKB.get(i).getMemberName());
+			System.out.printf("%13s ", memKB.get(i).getMemberId());
+			System.out.printf("%10s ", memKB.get(i).getMemberBank());
+			System.out.printf("%16s ", memKB.get(i).getKbNum());
+			System.out.printf("%15s원 ", memKB.get(i).getKbBalance());
+			System.out.printf("%7s ", memKB.get(i).getLoanYn());
+			System.out.printf("%15s원 ", memKB.get(i).getLoanMoney());
+			System.out.printf("%15s원 ", memKB.get(i).getLoanLimit());
+			System.out.printf("%15s ", memKB.get(i).getEnrollDate());
+			System.out.println();
+		}
+	}
+	
+	
+	/**-------------------------------------------------------------------------------------------------
 	/ 로그인 뷰
 	/-------------------------------------------------------------------------------------------------*/
 	public Member loginView() {
