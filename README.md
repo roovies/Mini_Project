@@ -52,5 +52,5 @@
 <img src="https://user-images.githubusercontent.com/119032680/210229766-827d09b0-b483-4c75-9292-185da020b0ea.png" width="30%" height="30%">
 
 > **3. 로그인**
-1. 패스워드 
+**1.패스워드 불일치**
 <img src="https://user-images.githubusercontent.com/119032680/210230231-b4992cd9-3026-4f19-8d92-8cdf17db83e9.png" width="50%" height="50%">
