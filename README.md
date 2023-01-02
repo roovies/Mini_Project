@@ -55,4 +55,5 @@
 1. **패스워드 불일치**
     - 로그인 실패 메시지와 함께 로그를 기록하며, 초기 화면으로 돌아감
 <img src="https://user-images.githubusercontent.com/119032680/210230529-cd5bcbf2-d8fa-4b7f-8df0-ff41d98b2574.png" width="50%" height="50%">
+
 2. **로그인 성공**
