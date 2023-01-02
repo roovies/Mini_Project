@@ -44,4 +44,4 @@
 
 ## ▶ 동작화면
 > **1. 초기 화면**
-![1  초기화면](https://user-images.githubusercontent.com/119032680/210227136-8b1189a0-395d-4310-a8bd-075c8035c118.png)
+![1  초기화면](https://user-images.githubusercontent.com/119032680/210227136-8b1189a0-395d-4310-a8bd-075c8035c118.png) {: width="250" height="80"}
