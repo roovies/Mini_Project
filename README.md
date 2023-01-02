@@ -53,4 +53,6 @@
 
 > **3. 로그인**
 1. **패스워드 불일치**
+    - 로그인 실패 메시지와 함께 로그를 기록하며, 초기 화면으로 
 <img src="https://user-images.githubusercontent.com/119032680/210230231-b4992cd9-3026-4f19-8d92-8cdf17db83e9.png" width="50%" height="50%">
+2. **로그인 성공**
