@@ -44,5 +44,5 @@
 
 ## ▶ 동작화면
 > **1. 초기 화면**
-<img src="![image](https://user-images.githubusercontent.com/119032680/210227934-e1ef88ff-3f0e-4643-8821-07ea63798425.png)" width="200" height="100">
+<img src="./![image](https://user-images.githubusercontent.com/119032680/210227934-e1ef88ff-3f0e-4643-8821-07ea63798425.png)" width="200" height="100">
 > **2. 회원가입 **
