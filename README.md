@@ -69,7 +69,16 @@
 
 > **5. 송금하기**
 1. **잔액 검사**
-    - 소유한 잔액과 송금액을 비교하여 송금액이 더 클 경우 
+    - 소유한 잔액과 송금액을 비교하여 송금액이 더 클 경우 재입력하게 함
 <img src="https://user-images.githubusercontent.com/119032680/210243797-ee2df69a-b6d9-433c-a740-3dfe3880e209.png" width="50%" height="50%">
 2. **수취인 계좌 유효 검사**
-    - ㅇㅁ
+    - 수취인의 계좌번호가 존재하지 않거나, 은행명이 일치하지 않을 경우 송금에 실패
+    - 수취인의 계좌번호와 은행명이 일치하는 경우 수취인의 계좌정보를 간략하게 출력
+    - 타 은행으로 송금 가능
+<img src="https://user-images.githubusercontent.com/119032680/210244616-7849b0dd-6b39-4c33-b5aa-6426839b0f1b.png" width="50%" height="50%">
+<img src="https://user-images.githubusercontent.com/119032680/210244998-14f1db2e-439d-4940-9797-e45d0987c16b.png" width="50%" height="50%">
+3. **계좌 비밀번호 인증을 통한 송금완료**
+    - 계좌 비밀번호가 일치하지 않을 경우 송금에 실패
+    - 계좌 비밀번호가 일치할 경우 송금에 성공하고 로그에 기록함
+<img src="https://user-images.githubusercontent.com/119032680/210245184-3a58f2a0-cc54-4270-b27c-3d19754d435e.png" width="50%" height="50%">
+<img src="https://user-images.githubusercontent.com/119032680/210245513-be766612-811e-4e2a-bf48-648a84010fbf.png" width="50%" height="50%">
