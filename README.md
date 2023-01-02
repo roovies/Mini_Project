@@ -44,9 +44,9 @@
 
 ## ▶ 동작화면
 > **1. 초기 화면**
->> <img src="https://user-images.githubusercontent.com/119032680/210227934-e1ef88ff-3f0e-4643-8821-07ea63798425.png" width="50%" height="50%">
+<img src="https://user-images.githubusercontent.com/119032680/210227934-e1ef88ff-3f0e-4643-8821-07ea63798425.png" width="50%" height="50%">
 
 > **2. 회원가입**
 <img src="https://user-images.githubusercontent.com/119032680/210228994-7b8027fc-8bb3-4560-9cbd-ee55a4af95e7.png" width="50%" height="50%">
-회원가입 시 은행만 선택하면 계좌번호는 자동으로 생성해준다.
+* 회원가입 시 은행만 선택하면 계좌번호는 자동으로 생성해준다.
 <img src="https://user-images.githubusercontent.com/119032680/210229766-827d09b0-b483-4c75-9292-185da020b0ea.png" width="30%" height="30%">
