@@ -78,6 +78,7 @@
 * 타 은행으로 송금 가능
 <img src="https://user-images.githubusercontent.com/119032680/210244616-7849b0dd-6b39-4c33-b5aa-6426839b0f1b.png" width="50%" height="50%">
 <img src="https://user-images.githubusercontent.com/119032680/210244998-14f1db2e-439d-4940-9797-e45d0987c16b.png" width="50%" height="50%">
+
 3. **계좌 비밀번호 인증을 통한 송금완료**
 * 계좌 비밀번호가 일치하지 않을 경우 송금에 실패
 * 계좌 비밀번호가 일치할 경우 송금에 성공하고 로그에 기록함
