@@ -15,3 +15,6 @@
     + Brute-Force/Dictionary/RainbowTable Attack
   - SQLi취약점을 제거할 것
     + PreparedStatement
+* 전체 회원 목록 조회
+  - 관리자만이 전체 회원 정보를 조회할 수 있도록 할 것
+  - 목록을 조회할 때마다 로그로 기록할 
