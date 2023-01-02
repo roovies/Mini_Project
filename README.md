@@ -63,5 +63,5 @@
 <img src="https://user-images.githubusercontent.com/119032680/210242708-bec2b9ee-88f4-4e68-a9e3-acf72ea5ff5b.png" width="50%" height="50%">
 
 > **4. 내정보 조회**
-    - 사용자의 은행이 어딘지 판단하여 사용자 정보와 계좌 정보가 
+  - 사용자의 은행이 어딘지 판단하여 사용자 정보와 계좌 정보가 
 <img src="https://user-images.githubusercontent.com/119032680/210243205-c9355046-a681-4051-96a2-c330013c73a6.png" width="50%" height="50%">
