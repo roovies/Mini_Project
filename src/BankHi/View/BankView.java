@@ -10,6 +10,7 @@ import java.util.Scanner;
 import BankHi.Model.VO.Member;
 import BankHi.Model.VO.MemberKB;
 import BankHi.Model.VO.MemberSH;
+import BankHi.Model.VO.SendInfo;
 
 public class BankView {
 	Scanner sc;
@@ -254,6 +255,7 @@ public class BankView {
 		System.out.println("■■\t\t\t\t"+member.getMemberName()+"님 환영합니다. *^^*\t\t\t■■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("1. 내정보 조회");
+		System.out.println("2. 송금하기");
 		System.out.println("0. 로그아웃");
 		System.out.print("선택 >> ");
 		int select = sc.nextInt();
@@ -285,13 +287,127 @@ public class BankView {
 		System.out.println("[대출가능여부] "+memKB.getLoanYn()+"\t[대출한도] "+memKB.getLoanLimit()+"원 \t\t[상환할 금액] "+memKB.getLoanMoney());
 	}
 	
+	/**-------------------------------------------------------------------------------------------------
+	/ 타인 계좌로 송금 뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public SendInfo sendMoneyView(MemberSH memSH, MemberKB memKB) {
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■■\t\t\t\t타인 계좌로 송금\t\t\t\t■■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		int money = 0;
+		String accountNum = "";
+		String bankName = "";
+		int choice = 0;
+		if(memKB==null) { //송금자가 SH은행일 경우
+			System.out.println("■ 현재 "+memSH.getMemberName()+"님의 송금 가능 잔액은 "+memSH.getShBalance()+"원 입니다.");
+			while(true) {
+				System.out.println("1. 보낼 금액을 입력해주세요. ");
+				System.out.print("  입력 >> ");
+				money = sc.nextInt();
+				if(money>memSH.getShBalance()) {
+					System.out.println("※ 잔액이 부족합니다. 다시 입력해주세요.");
+					System.out.println();
+				}
+				else if(money<1) {
+					System.out.println("※ 1원 이상의 금액을 입력해주세요.");
+					System.out.println();
+				}
+				else
+					break;
+			}
+			System.out.println("2. 받으실 분의 계좌번호를 하이픈(-)을 제외한 숫자로만 입력해주세요.");
+			System.out.print("  입력 >> ");
+			accountNum = sc.next();
+			System.out.println("3. 은행을 선택해주세요.");
+			while(true) {
+				System.out.println("[1]SH은행  [2]KB은행");
+				System.out.print("  입력 >> ");
+				choice = sc.nextInt();
+				if(choice==1) {
+					bankName = "SH은행";
+					break;
+				}
+				else if(choice==2) {
+					bankName = "KB은행";
+					break;
+				}
+				else {
+					System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도해주세요.");
+					System.out.println();
+				}
+			}
+			SendInfo sendInfo = new SendInfo(bankName, accountNum, money);
+			return sendInfo;
+		}
+		else { //송금자가 KB은행일 경우
+			System.out.println("■ 현재 "+memKB.getMemberName()+"님의 송금 가능 잔액은 "+memKB.getKbBalance()+"원 입니다.");
+			while(true) {
+				System.out.println("1. 보낼 금액을 입력해주세요. ");
+				System.out.print("  입력 >> ");
+				money = sc.nextInt();
+				if(money>memKB.getKbBalance()) {
+					System.out.println("※ 잔액이 부족합니다. 다시 입력해주세요.");
+					System.out.println();
+				}
+				else if(money<1) {
+					System.out.println("※ 1원 이상의 금액을 입력해주세요.");
+					System.out.println();
+				}
+				else
+					break;
+			}
+			System.out.println("2. 받으실 분의 계좌번호를 하이픈(-)을 제외한 숫자로만 입력해주세요.");
+			System.out.print("  입력 >> ");
+			accountNum = sc.next();
+			System.out.println("3. 은행을 선택해주세요.");
+			while(true) {
+				System.out.println("[1]SH은행  [2]KB은행");
+				System.out.print("  입력 >> ");
+				choice = sc.nextInt();
+				if(choice==1) {
+					bankName = "SH은행";
+					break;
+				}
+				else if(choice==2) {
+					bankName = "KB은행";
+					break;
+				}
+				else {
+					System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도해주세요.");
+					System.out.println();
+				}
+			}
+			SendInfo sendInfo = new SendInfo(bankName, accountNum, money);
+			return sendInfo;
+		}
+	}
+	/**-------------------------------------------------------------------------------------------------
+	/ 송금 전 계좌정보 확인 뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public int sendCheckView(SendInfo sendInfo) {
+		System.out.println("=================================");
+		System.out.println("=\t송금\t정보\t확인\t=");
+		System.out.println("=================================");
+		System.out.println("[받는 분] "+sendInfo.getMemberName());
+		System.out.println("[은행명] "+sendInfo.getBankName());
+		System.out.println("[계좌번호] "+sendInfo.getAccountNum());
+		System.out.println("[금액] "+sendInfo.getMoney()+"원");
+		System.out.println("=================================");
+		System.out.println("※ [1] 송금하기   [2] 취소하기");
+		System.out.print("  입력 >> ");
+		int choice = sc.nextInt();
+		return choice;
+	}
 	
-	
-	
-	
-	
-	
-	
+	/**-------------------------------------------------------------------------------------------------
+	/ 송금 전 비밀번호 확인 뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public String checkPwView() {
+		System.out.println("※ 계좌비밀번호 4자리를 입력하세요.");
+		System.out.print("  입력 >> ");
+		String bankpwd = sc.next();
+		return bankpwd;
+	}
 	
 	/**-------------------------------------------------------------------------------------------------
 	/ 시스템 메시지 (성공/실패)

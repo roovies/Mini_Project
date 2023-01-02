@@ -12,6 +12,7 @@ import java.util.List;
 import BankHi.Model.VO.Member;
 import BankHi.Model.VO.MemberKB;
 import BankHi.Model.VO.MemberSH;
+import BankHi.Model.VO.SendInfo;
 
 
 public class MemberDAO {
@@ -323,4 +324,112 @@ public class MemberDAO {
 		}
 		return memKB;
 	}
+	
+	/**-------------------------------------------------------------------------------------------------
+	/ 송금관련 DAO
+	/-------------------------------------------------------------------------------------------------*/
+	//계좌 존재여부 검사 DAO
+	public MemberSH selectSHNum(SendInfo sendInfo) { //SH은행 계좌 유효성 검사
+		MemberSH memSH = null;
+		try {
+			/** JDBC */
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PW);;
+			String sql = "SELECT * FROM SHBANK WHERE SH_NUM=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sendInfo.getAccountNum());
+			ResultSet rset = pstmt.executeQuery();
+			if(rset.next()) {
+				memSH = new MemberSH();
+				memSH.setMemberId(rset.getString("SH_ID"));
+				memSH.setMemberName(rset.getString("SH_NAME"));
+				memSH.setShNum(rset.getString("SH_NUM"));
+				memSH.setShPw(rset.getString("SH_PW"));
+				memSH.setShBalance(rset.getInt("SH_BALANCE"));
+				memSH.setLoanYn(rset.getString("LOAN_YN"));
+				memSH.setLoanMoney(rset.getInt("LOAN_MONEY"));
+				memSH.setLoanLimit(rset.getInt("LOAN_LIMIT"));
+				memSH.setEnrollDate(rset.getDate("SH_ENROLL_DATE"));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return memSH;
+	}
+	
+	public MemberKB selectKBNum(SendInfo sendInfo) { //KB은행 계좌 유효성 검사
+		MemberKB memKB = null;
+		try {
+			/** JDBC */
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PW);;
+			String sql = "SELECT * FROM KBBANK WHERE KB_NUM=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sendInfo.getAccountNum());
+			ResultSet rset = pstmt.executeQuery();
+			if(rset.next()) {
+				memKB = new MemberKB();
+				memKB.setMemberId(rset.getString("KB_ID"));
+				memKB.setMemberName(rset.getString("KB_NAME"));
+				memKB.setKbNum(rset.getString("KB_NUM"));
+				memKB.setKbPw(rset.getString("KB_PW"));
+				memKB.setKbBalance(rset.getInt("KB_BALANCE"));
+				memKB.setLoanYn(rset.getString("LOAN_YN"));
+				memKB.setLoanMoney(rset.getInt("LOAN_MONEY"));
+				memKB.setLoanLimit(rset.getInt("LOAN_LIMIT"));
+				memKB.setEnrollDate(rset.getDate("KB_ENROLL_DATE"));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return memKB;
+	}
+	
+	
+	
+	//잔액 갱신 DAO
+	public int updateSHMoney(MemberSH memSH) {
+		int result = 0;
+		try {
+			/** JDBC */
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PW);;
+			String sql = "UPDATE SHBANK SET SH_BALANCE=? WHERE SH_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memSH.getShBalance());
+			pstmt.setString(2, memSH.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int updateKBMoney(MemberKB memKB) {
+		int result = 0;
+		try {
+			/** JDBC */
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PW);;
+			String sql = "UPDATE KBBANK SET KB_BALANCE=? WHERE KB_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memKB.getKbBalance());
+			pstmt.setString(2, memKB.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return result;
+	}
+	
 }

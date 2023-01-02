@@ -8,6 +8,7 @@ import BankHi.Controller.LogController;
 import BankHi.Model.VO.Member;
 import BankHi.Model.VO.MemberKB;
 import BankHi.Model.VO.MemberSH;
+import BankHi.Model.VO.SendInfo;
 import BankHi.View.BankView;
 
 public class BankRun {
@@ -18,6 +19,7 @@ public class BankRun {
 		Member member = null;
 		MemberSH memSH = null;
 		MemberKB memKB = null;
+		SendInfo sendInfo = null;
 		List<Member> mList = new ArrayList<Member>();
 		List<MemberSH> shList = new ArrayList<MemberSH>();
 		List<MemberKB> kbList = new ArrayList<MemberKB>();
@@ -38,6 +40,7 @@ public class BankRun {
 			case 1 : 
 				member = bView.loginView();
 				member = bCon.login(member);
+				
 				if(member==null) {								//로그인 실패
 					bView.failedView("로그인");
 					logCon.logging("로그인 실패", member);
@@ -83,7 +86,35 @@ public class BankRun {
 								logCon.logging("내정보 조회 성공", member);
 							}
 							break;
-						case 2 :
+						case 2 : //송금
+							memSH = bCon.loadSHMember(member);
+							memKB = bCon.loadKBMember(member);
+							sendInfo = bView.sendMoneyView(memSH, memKB);
+							sendInfo = bCon.checkBank(sendInfo); //null이면 계좌존재x
+							if(sendInfo!=null) {
+								select = bView.sendCheckView(sendInfo);
+								if(select==1) {
+									String bankpwd = bView.checkPwView();
+									result = bCon.checkPw(bankpwd, member);
+									if(result==1) {
+										bCon.sendMoney(sendInfo, memSH, memKB);
+										bView.successView("타인 계좌로 송금");
+										logCon.logging("타인 계좌로 송금", member);
+									}
+									else {
+										bView.failedView("비밀번호가 일치하지 않아 송금");
+										break;
+									}
+								}
+								else if(select==2) {
+									bView.successView("송금 취소");
+									break;
+								}
+							}
+							else {
+								bView.failedView("계좌번호가 존재하지 않아 송금");
+							}
+							
 							break;
 						case 0 : //로그아웃
 							bView.successView("로그아웃");
@@ -96,8 +127,9 @@ public class BankRun {
 				}
 				break;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//				logout://no
-
+//				//로그인 세션 구현 (초기버전)
+////				logout://no
+//
 //				adlogout:
 //				/**-------------------------------------------------------------------------------------------------
 //				/ 로그인세션
@@ -114,7 +146,7 @@ public class BankRun {
 //							switch(select) {
 //							case 1:
 //								mList = bCon.searchAll();
-//								bView.ad_memberListView(mList);
+//								bView.ad_memberListView(shList, kbList);
 //								break;
 //							case 0:
 //								break adlogout;
@@ -155,6 +187,7 @@ public class BankRun {
 //					logCon.logging("로그인 실패", member);
 //				}
 //				break;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			/**-------------------------------------------------------------------------------------------------
 			/ 메인 - 회원가입 세션
 			/-------------------------------------------------------------------------------------------------*/
