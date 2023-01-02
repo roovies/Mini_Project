@@ -13,4 +13,5 @@
   - 관리자로 로그인 시 일반회원과 다른 관리자 페이지 세션으로 접근하도록 할 것
   - 로그인 성공/실패에 대한 로그를 기록할 것
     + Brute-Force/Dictionary/RainbowTable Attack
-    + 
+  - SQLi취약점을 제거할 것
+    + PreparedStatement
