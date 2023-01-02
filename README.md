@@ -52,7 +52,6 @@
     - 회원가입 성공 시 누가 가입에 성공했는지 **IP**와 **ID**를 로그로 기록함 
 <img src="https://user-images.githubusercontent.com/119032680/210228994-7b8027fc-8bb3-4560-9cbd-ee55a4af95e7.png" width="50%" height="50%">
 <img src="https://user-images.githubusercontent.com/119032680/210229766-827d09b0-b483-4c75-9292-185da020b0ea.png" width="40%" height="40%">
-<img src="https://user-images.githubusercontent.com/119032680/210230920-26952ed1-8b00-4cd2-9e44-d9a17985731c.png" width="80%" height="80%">
 
 > **3. 로그인**
 1. **패스워드 불일치**
