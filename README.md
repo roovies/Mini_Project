@@ -60,8 +60,8 @@
 <img src="https://user-images.githubusercontent.com/119032680/210230529-cd5bcbf2-d8fa-4b7f-8df0-ff41d98b2574.png" width="50%" height="50%">
 
 2. **로그인 성공**
-<img src="https://user-images.githubusercontent.com/119032680/210242708-bec2b9ee-88f4-4e68-a9e3-acf72ea5ff5b.png" width="50%" height="50%">
     - 로그인 성공 메시지와 함께 로그를 기록하며, 관리자인지 일반회원인지 판단한 후 그에 맞는 세션이 생성됨
+<img src="https://user-images.githubusercontent.com/119032680/210242708-bec2b9ee-88f4-4e68-a9e3-acf72ea5ff5b.png" width="50%" height="50%">
 
 > **4. 내정보 조회**
 * 
