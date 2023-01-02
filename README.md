@@ -49,10 +49,10 @@
 > **2. 회원가입**
 1. **회원가입 성공**
     - 회원가입 시 은행만 선택하면 계좌번호는 자동으로 생성
-    - 회원가입 성공 시 누가 가입에 성공했는지 로그로 
+    - 회원가입 성공 시 누가 가입에 성공했는지 로그로 기록함 
 <img src="https://user-images.githubusercontent.com/119032680/210228994-7b8027fc-8bb3-4560-9cbd-ee55a4af95e7.png" width="50%" height="50%">
 <img src="https://user-images.githubusercontent.com/119032680/210229766-827d09b0-b483-4c75-9292-185da020b0ea.png" width="30%" height="30%">
-<img src="https://user-images.githubusercontent.com/119032680/210230920-26952ed1-8b00-4cd2-9e44-d9a17985731c.png" width="50%" height="50%">
+<img src="https://user-images.githubusercontent.com/119032680/210230920-26952ed1-8b00-4cd2-9e44-d9a17985731c.png" width="70%" height="70%">
 
 > **3. 로그인**
 1. **패스워드 불일치**
@@ -60,3 +60,4 @@
 <img src="https://user-images.githubusercontent.com/119032680/210230529-cd5bcbf2-d8fa-4b7f-8df0-ff41d98b2574.png" width="50%" height="50%">
 
 2. **로그인 성공**
+<img src="">
