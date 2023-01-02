@@ -81,4 +81,4 @@
     - 계좌 비밀번호가 일치하지 않을 경우 송금에 실패
     - 계좌 비밀번호가 일치할 경우 송금에 성공하고 로그에 기록함
 <img src="https://user-images.githubusercontent.com/119032680/210245184-3a58f2a0-cc54-4270-b27c-3d19754d435e.png" width="50%" height="50%">
-<img src="https://user-images.githubusercontent.com/119032680/210245513-be766612-811e-4e2a-bf48-648a84010fbf.png" width="50%" height="50%">
+<img src="https://user-images.githubusercontent.com/119032680/210245513-be766612-811e-4e2a-bf48-648a84010fbf.png" width="40%" height="40%">
