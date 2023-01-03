@@ -68,7 +68,7 @@
 <img src="https://user-images.githubusercontent.com/119032680/210243205-c9355046-a681-4051-96a2-c330013c73a6.png" width="50%" height="50%">
 
 > **5. 송금하기**
-1. **잔액 검사**
+① **잔액 검사**
 * 소유한 잔액과 송금액을 비교하여 송금액이 더 클 경우 재입력하게 함
 <img src="https://user-images.githubusercontent.com/119032680/210243797-ee2df69a-b6d9-433c-a740-3dfe3880e209.png" width="50%" height="50%">
 
