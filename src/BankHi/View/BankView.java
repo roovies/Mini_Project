@@ -45,6 +45,9 @@ public class BankView {
 		System.out.println("■■\t\t\t\t"+member.getMemberName()+"님 환영합니다. *^^*\t\t\t■■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("1. 전체 회원 목록");
+		System.out.println("2. 대출상품 목록");
+		System.out.println("3. 대출상품 추가");
+		System.out.println("4. 대출상품 삭제");
 		System.out.println("0. 로그아웃");
 		System.out.print("선택 >> ");
 		int select = sc.nextInt();
@@ -165,7 +168,7 @@ public class BankView {
 		System.out.print("  입력 >> ");
 		String inputPw2 = sc.next();
 		if(!inputPw.equals(inputPw2)) {
-			System.out.println("입력한 비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+			System.out.println("입력한 비밀번호가 일치하지 않습니다. 다시 입력하세요.");
 			member.setMemberPw(null);
 			return member;
 		}
@@ -229,7 +232,7 @@ public class BankView {
 				break;
 			}
 			else {
-				System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도해주세요.");
+				System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도하세요.");
 			}
 		}
 		System.out.println("■ 통장 비밀번호를 입력하세요. (4자리)");
@@ -256,6 +259,11 @@ public class BankView {
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("1. 내정보 조회");
 		System.out.println("2. 송금하기");
+		System.out.println("3. 거래내역 조회");
+		System.out.println("4. 대출신청");
+		System.out.println("5. 대출현황");
+		System.out.println("6. 회원정보 수정");
+		System.out.println("7. 회원탈퇴");
 		System.out.println("0. 로그아웃");
 		System.out.print("선택 >> ");
 		int select = sc.nextInt();
@@ -273,7 +281,7 @@ public class BankView {
 		System.out.println("[아이디] "+member.getMemberId()+"\t\t[패스워드] ********\t\t[가입일] "+member.getEnrollDate());
 		System.out.println("[이름] "+member.getMemberName()+"\t\t[성별] "+member.getMemberGender()+"\t\t\t[생년월일]"+member.getMemberSSN().substring(0, 6));
 		System.out.println("[은행명] "+member.getMemberBank()+"\t\t[계좌번호] "+memSH.getShNum()+"\t\t[잔액] "+memSH.getShBalance()+"원");
-		System.out.println("[대출가능여부] "+memSH.getLoanYn()+"\t[대출한도] "+memSH.getLoanLimit()+"원 \t\t[상환할 금액] "+memSH.getLoanMoney());
+		System.out.println("[대출가능여부] "+memSH.getLoanYn()+"\t[대출한도] "+memSH.getLoanLimit()+"원 \t\t[상환할 금액] "+memSH.getLoanMoney()+"원");
 	}
 	
 	public void mypageView(Member member, MemberKB memKB) {
@@ -284,7 +292,7 @@ public class BankView {
 		System.out.println("[아이디] "+member.getMemberId()+"\t\t[패스워드] ********\t\t[가입일] "+member.getEnrollDate());
 		System.out.println("[이름] "+member.getMemberName()+"\t\t[성별] "+member.getMemberGender()+"\t\t\t[생년월일]"+member.getMemberSSN().substring(0, 6));
 		System.out.println("[은행명] "+member.getMemberBank()+"\t\t[계좌번호] "+memKB.getKbNum()+"\t[잔액] "+memKB.getKbBalance()+"원");
-		System.out.println("[대출가능여부] "+memKB.getLoanYn()+"\t[대출한도] "+memKB.getLoanLimit()+"원 \t\t[상환할 금액] "+memKB.getLoanMoney());
+		System.out.println("[대출가능여부] "+memKB.getLoanYn()+"\t[대출한도] "+memKB.getLoanLimit()+"원 \t\t[상환할 금액] "+memKB.getLoanMoney()+"원");
 	}
 	
 	/**-------------------------------------------------------------------------------------------------
@@ -301,24 +309,24 @@ public class BankView {
 		if(memKB==null) { //송금자가 SH은행일 경우
 			System.out.println("■ 현재 "+memSH.getMemberName()+"님의 송금 가능 잔액은 "+memSH.getShBalance()+"원 입니다.");
 			while(true) {
-				System.out.println("1. 보낼 금액을 입력해주세요. ");
+				System.out.println("1. 보낼 금액을 입력하세요. ");
 				System.out.print("  입력 >> ");
 				money = sc.nextInt();
 				if(money>memSH.getShBalance()) {
-					System.out.println("※ 잔액이 부족합니다. 다시 입력해주세요.");
+					System.out.println("※ 잔액이 부족합니다. 다시 입력하세요.");
 					System.out.println();
 				}
 				else if(money<1) {
-					System.out.println("※ 1원 이상의 금액을 입력해주세요.");
+					System.out.println("※ 1원 이상의 금액을 입력하세요.");
 					System.out.println();
 				}
 				else
 					break;
 			}
-			System.out.println("2. 받으실 분의 계좌번호를 하이픈(-)을 제외한 숫자로만 입력해주세요.");
+			System.out.println("2. 받으실 분의 계좌번호를 하이픈(-)을 제외한 숫자로만 입력하세요.");
 			System.out.print("  입력 >> ");
 			accountNum = sc.next();
-			System.out.println("3. 은행을 선택해주세요.");
+			System.out.println("3. 은행을 선택하세요.");
 			while(true) {
 				System.out.println("[1]SH은행  [2]KB은행");
 				System.out.print("  입력 >> ");
@@ -332,7 +340,7 @@ public class BankView {
 					break;
 				}
 				else {
-					System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도해주세요.");
+					System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도하세요.");
 					System.out.println();
 				}
 			}
@@ -342,24 +350,24 @@ public class BankView {
 		else { //송금자가 KB은행일 경우
 			System.out.println("■ 현재 "+memKB.getMemberName()+"님의 송금 가능 잔액은 "+memKB.getKbBalance()+"원 입니다.");
 			while(true) {
-				System.out.println("1. 보낼 금액을 입력해주세요. ");
+				System.out.println("1. 보낼 금액을 입력하세요. ");
 				System.out.print("  입력 >> ");
 				money = sc.nextInt();
 				if(money>memKB.getKbBalance()) {
-					System.out.println("※ 잔액이 부족합니다. 다시 입력해주세요.");
+					System.out.println("※ 잔액이 부족합니다. 다시 입력하세요.");
 					System.out.println();
 				}
 				else if(money<1) {
-					System.out.println("※ 1원 이상의 금액을 입력해주세요.");
+					System.out.println("※ 1원 이상의 금액을 입력하세요.");
 					System.out.println();
 				}
 				else
 					break;
 			}
-			System.out.println("2. 받으실 분의 계좌번호를 하이픈(-)을 제외한 숫자로만 입력해주세요.");
+			System.out.println("2. 받으실 분의 계좌번호를 하이픈(-)을 제외한 숫자로만 입력하세요.");
 			System.out.print("  입력 >> ");
 			accountNum = sc.next();
-			System.out.println("3. 은행을 선택해주세요.");
+			System.out.println("3. 은행을 선택하세요.");
 			while(true) {
 				System.out.println("[1]SH은행  [2]KB은행");
 				System.out.print("  입력 >> ");
@@ -373,7 +381,7 @@ public class BankView {
 					break;
 				}
 				else {
-					System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도해주세요.");
+					System.out.println("※ 1 또는 2를 입력해야 합니다. 다시 시도하세요.");
 					System.out.println();
 				}
 			}
@@ -407,6 +415,44 @@ public class BankView {
 		System.out.print("  입력 >> ");
 		String bankpwd = sc.next();
 		return bankpwd;
+	}
+	
+	/**-------------------------------------------------------------------------------------------------
+	/ 계좌 비밀번호 변경 뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public String ModifyBankPwView() {
+		System.out.println("■ 새 비밀번호를 입력하세요.");
+		System.out.print("  입력 >> ");
+		String inputPw = sc.next();
+		System.out.println("■ 비밀번호를 한 번 더 입력하세요.");
+		System.out.print("  입력 >> ");
+		String inputPw2 = sc.next();
+		if(!inputPw.equals(inputPw2)) {
+			System.out.println("입력한 비밀번호가 일치하지 않습니다. 다시 입력하세요.");
+			return inputPw;
+		}
+		else {
+			return inputPw;
+		}
+	}
+	/**-------------------------------------------------------------------------------------------------
+	/ 회원정보 수정 뷰
+	/-------------------------------------------------------------------------------------------------*/
+	public int modifyView() {
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■■\t\t회\t원\t정\t보\t수\t정\t\t\t■■");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("■ 수정할 항목을 선택하세요.");
+		System.out.println("[1] 패스워드 변경\t[2] 계좌 비밀번호 변경");
+		System.out.print("  입력 >> ");
+		int select = sc.nextInt();
+		return select;
+	}
+	public String inputPwView() {
+		System.out.println("※ 현재 비밀번호를 입력하세요.");
+		System.out.print("  입력 >> ");
+		String loginpw = sc.next();
+		return loginpw;
 	}
 	
 	/**-------------------------------------------------------------------------------------------------

@@ -116,6 +116,73 @@ public class BankRun {
 							}
 							
 							break;
+						case 3 : //거래내역 조회
+							break;
+						case 4 : //대출신청
+							break;
+						case 5 : //대출현황
+							break;
+						case 6 : //회원정보 수정
+							select = bView.modifyView();
+							if(select==1) { //로그인 비밀번호 변경
+								String loginpw = bView.inputPwView();
+								if(loginpw.equals(member.getMemberPw())) {
+									member = bView.searchPwOkView(member);
+									while(true) {
+										if(member.getMemberPw()==null) {
+											member = bView.searchPwOkView(member);
+										}
+										else {
+											result = bCon.modifyPw(member);
+											bView.successView("로그인 비밀번호 변경");
+											logCon.logging("로그인 비밀번호 변경 성공", member);
+											break;
+										}
+									}
+								}
+								else
+									bView.failedView("비밀번호가 일치하지 않아 비밀번호 변경");
+							}
+							else if(select==2) { //계좌 비밀번호 변경
+								memSH = bCon.loadSHMember(member);
+								memKB = bCon.loadKBMember(member);
+								String bankpw = bView.checkPwView();
+								result = bCon.checkBankPw(memSH, memKB, bankpw); //1이면 SH은행, 2면 KB은행, 0이면 비밀번호일치x
+								switch(result) {
+								case 1 : //SH은행
+									bankpw = bView.ModifyBankPwView();
+									result = bCon.modifySHPw(memSH, bankpw);
+									if(result>0) {
+										bView.successView("계좌 비밀번호 변경");
+										logCon.logging("계좌 비밀번호 변경 성공", member);
+									}
+									else {
+										bView.failedView("비밀번호가 4자리를 초과하여 변경");
+									}
+									break;
+								case 2 : //KB은행
+									bankpw = bView.ModifyBankPwView();
+									result = bCon.modifyKBPw(memKB, bankpw);
+									if(result>0) {
+										bView.successView("계좌 비밀번호 변경");
+										logCon.logging("계좌 비밀번호 변경 성공", member);
+									}
+									else {
+										bView.failedView("비밀번호가 4자리를 초과하여 변경");
+									}
+									break;
+								case 0 :
+									bView.failedView("비밀번호가 일치하지 않아 비밀번호 변경");
+									break;
+								default :
+									break;
+								}
+							}
+							else
+								bView.failedView("1 또는 2를 입력하지 않아 회원정보 수정");
+							break;
+						case 7 : //회원탈퇴
+							break;
 						case 0 : //로그아웃
 							bView.successView("로그아웃");
 							logCon.logging("로그아웃", member);
@@ -255,8 +322,8 @@ public class BankRun {
 							bView.searchPwOkView(member);
 						else {
 							result = bCon.modifyPw(member);
-							bView.successView("비밀번호 변경");
-							logCon.logging("비밀번호 변경 성공", member);
+							bView.successView("비밀번호 찾기");
+							logCon.logging("비밀번호 찾기 성공", member);
 							break;
 						}
 					}

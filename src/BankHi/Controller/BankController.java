@@ -78,9 +78,20 @@ public class BankController {
 		}
 		return member;
 	}
-	
+	//로그인 패스워드 수정
 	public int modifyPw(Member member) {
 		int result = mDAO.updatePw(member);
+		return result;
+	}
+	
+	//계좌 비밀번호 수정
+	public int modifySHPw(MemberSH memSH, String bankpw) {
+		int result = mDAO.updateSHPw(memSH, bankpw);
+		return result;
+	}
+	
+	public int modifyKBPw(MemberKB memKB, String bankpw) {
+		int result = mDAO.updateKBPw(memKB, bankpw);
 		return result;
 	}
 	
@@ -108,6 +119,22 @@ public class BankController {
 		return memKB;
 	}
 	
+	/**-------------------------------------------------------------------------------------------------
+	/ 계좌비밀번호 변경 관련 기능
+	/-------------------------------------------------------------------------------------------------*/
+	public int checkBankPw(MemberSH memSH, MemberKB memKB, String bankpw) {
+			if(memSH!=null) { // SH은행
+				if(memSH.getShPw().equals(bankpw)) {
+					return 1;
+				}
+			}
+			else if(memKB!=null) { // KB은행
+				if(memKB.getKbPw().equals(bankpw)) {
+					return 2;
+				}
+			}
+		return 0; //해당 계좌 존재x
+	}
 	/**-------------------------------------------------------------------------------------------------
 	/ 송금하기 기능
 	/-------------------------------------------------------------------------------------------------*/
